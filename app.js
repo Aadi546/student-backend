@@ -21,9 +21,5 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('Connected to MongoDB Atlas!'))
 .catch((err) => console.error('Connection error:', err));
 
-
-const port=3000;
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
-
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
