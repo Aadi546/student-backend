@@ -1,5 +1,8 @@
 require('dotenv').config();           // loads MONGODB_URI from your .env
 console.log('MONGODB_URI =', process.env.MONGODB_URI);
+// Temporary CORS setup
+const cors = require('cors');
+app.use(cors({ origin: '*' }));  // Allow all for now (hackathon)
 
 const express = require('express');
 const mongoose = require('mongoose');
