@@ -1,4 +1,5 @@
 require('dotenv').config();           // loads MONGODB_URI from your .env
+console.log('GOOGLE_CLIENT_ID =', process.env.GOOGLE_CLIENT_ID || 'MISSING!');
 console.log('MONGODB_URI =', process.env.MONGODB_URI);
 
 // Import dependencies
