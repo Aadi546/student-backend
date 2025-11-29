@@ -118,5 +118,22 @@ router.post("/google", async (req, res) => {
   }
 });
 
+// ADD THIS (backend needs callback route!)
+router.get("/auth/google", (req, res) => {
+  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+    new URLSearchParams({
+      client_id: process.env.GOOGLE_CLIENT_ID,
+      redirect_uri: `${req.protocol}://${req.get('host')}/auth/google/callback`,
+      response_type: "code",
+      scope: "openid email profile",
+      access_type: "offline"
+    });
+  res.redirect(googleAuthUrl);
+});
+
+router.get("/auth/google/callback", async (req, res) => {
+  // TODO: Exchange code for token (your POST logic here)
+  res.redirect(`https://students-ze5d.vercel.app/?success=true`);
+});
 
 module.exports = router;
