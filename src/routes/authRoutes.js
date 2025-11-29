@@ -118,32 +118,5 @@ router.post("/google", async (req, res) => {
   }
 });
 
-// ------------------ GOOGLE OAUTH START ------------------
-router.get("/auth/google", (req, res) => {
-  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=https://student-backend-lqcc.onrender.com/auth/google/callback&response_type=code&scope=profile%20email`;
-  res.redirect(googleAuthUrl);
-});
-
-// ------------------ GOOGLE OAUTH CALLBACK ------------------
-router.get("/auth/google/callback", async (req, res) => {
-  try {
-    const code = req.query.code;
-    if (!code) {
-      return res.redirect(`https://student.vercel.app/?error=no_code`);
-    }
-
-    // Create JWT token (same format as your /login)
-    const token = jwt.sign(
-      { userId: "google_user", username: "google_user@gmail.com" },
-      JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    res.redirect(`https://student.vercel.app/?token=${token}`);
-  } catch (err) {
-    console.error("Google callback error:", err);
-    res.redirect(`https://student.vercel.app/?error=auth_failed`);
-  }
-});
 
 module.exports = router;
