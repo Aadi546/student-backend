@@ -81,7 +81,7 @@ router.post("/google", async (req, res) => {
     // Verify token with Google
     const ticket = await googleClient.getTokenInfo(access_token);
 
-    const payload = ticket.getPayload();
+    const payload = ticket;
     const googleId = payload.sub;
     const email = payload.email;
 
