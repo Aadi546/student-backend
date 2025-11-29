@@ -67,9 +67,9 @@ router.post("/login", async (req, res) => {
 // ------------------ GOOGLE LOGIN / REGISTER ------------------
 router.post("/google", async (req, res) => {
   try {
-    const { id_token } = req.body;
+    const { access_token } = req.body;
 
-    if (!id_token) {
+    if (!access_token) {
       return res.status(400).json({ error: "No Google token provided" });
     }
     if (!GOOGLE_CLIENT_ID) {
@@ -80,7 +80,7 @@ router.post("/google", async (req, res) => {
 
     // Verify token with Google
     const ticket = await googleClient.verifyIdToken({
-      idToken: id_token,
+      idToken: access_token,
       audience: GOOGLE_CLIENT_ID,
     });
 
